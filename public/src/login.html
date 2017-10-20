@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>TEST</title>
+
+	<link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="row">
+			<%
+				if (locals.error) {
+					try {
+						let e = JSON.parse(locals.error);
+						if (e.message) {
+							if (typeof e.message === "object") {
+								locals.error = Object.keys(e.message).reduce((p, key)=>{
+									p.push(`${key}: ${e.message[key]}`);
+									return p;
+								}, []).join("<br/>");
+							} else {
+								locals.error = e.message;
+							}
+						}
+					} catch (err) {
+						null;
+					}
+				}
+			%>
+			<div class="col-lg-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-offset-3 col-sm-6 login__wrap">
+				<div class="panel panel__login panel--folded-corner orange">
+					<form method="POST" action="login">
+						<div class="panel__heading">
+							<div class="login__form">
+								<div class="form-group">
+									<label for="email" class="login__label">Email</label>
+									<!-- value="test@user.demo" -->
+									<input type="text" id="email" name="email" class="form-control login__input" placeholder="" >
+								</div>
+								<div class="form-group">
+									<label for="password" class="login__label">Password</label>
+									<!-- value="1234567A" -->
+									<input type="password" id="password" name="password" class="form-control login__input" placeholder="" >
+								</div>
+								<div class="form-group">
+									<label for="curlname" class="login__label">Company</label>
+									<!-- value="web-2015" -->
+									<input type="text" id="curlname" name="curlname" class="form-control login__input" placeholder="">
+								</div>
+								<% if (locals.error) { %>
+								<div class="row">
+									<div class="col-xs-12">
+										<p class="text-danger">
+											<%- locals.error %>
+										</p>
+									</div>
+								</div>
+								<% } %>
+								<hr/>
+								<button type="submit" class="btn btn-primary">Login</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/libs/jquery/dist/jquery.min.js"></script>
+
+	<script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

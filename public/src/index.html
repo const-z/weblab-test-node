@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>TEST</title>
+	<link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<div class="container">
+
+		<div class="row">
+			<% if (locals.error) { %>
+				<div class="row">
+					<div class="col-lg-offset-4 col-md-offset-4 col-lg-4 col-md-4 col-sm-offset-3 col-sm-6">
+						<div class="message--visible">
+							<p class="message__login message__login--error">
+								<%= error %>
+							</p>
+							<p>&nbsp;</p>
+						</div>
+					</div>
+				</div>
+			<% } %>
+			<div class="col-xs-12">
+					<%
+						for (let key of Object.keys(locals.user)) {
+							let value = locals.user[key];
+					%>
+							<div class="col-xs-3"><%= key %>&nbsp;</div>
+							<div class="col-xs-9"><%= JSON.stringify(value) %>&nbsp;</div>
+					<%
+						}
+					%>
+
+				<div class="col-xs-12">
+					<hr/>
+					<form method="get" action="/logout">
+						<input type="submit" value="Logout" class="btn btn-primary">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="/libs/jquery/dist/jquery.min.js"></script>
+	<script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

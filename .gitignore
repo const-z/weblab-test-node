@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+.vscode
+.etc/
+**/public/build/
+config-custom.js
+debug.log
